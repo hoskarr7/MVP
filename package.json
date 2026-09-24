@@ -1,0 +1,27 @@
+{
+  "name": "automation-suite",
+  "version": "1.0.0",
+  "description": "Suite de automatización E2E con Playwright + Cucumber + TypeScript (POM)",
+  "private": true,
+  "scripts": {
+    "test": "cucumber-js",
+    "test:tags": "cucumber-js --tags",
+    "test:headed": "cross-env HEADLESS=false cucumber-js",
+    "clean:reports": "rimraf reports/*.html reports/*.json"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mssql": "^12.7.1",
+    "playwright": "^1.47.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.1",
+    "@playwright/test": "^1.47.0",
+    "@types/mssql": "^12.3.0",
+    "@types/node": "^22.7.4",
+    "cross-env": "^7.0.3",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
