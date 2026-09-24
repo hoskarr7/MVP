@@ -7,12 +7,13 @@ async function obtenerPool(): Promise<sql.ConnectionPool> {
   if (!pool) {
     pool = await sql.connect({
       server: environment.db.server,
+      database: environment.db.database,
       port: environment.db.port,
       user: environment.db.user,
       password: environment.db.password,
       options: {
-        encrypt: true,
-        trustServerCertificate: true,
+        encrypt: environment.db.encrypt,
+        trustServerCertificate: environment.db.trustServerCertificate,
       },
     });
   }

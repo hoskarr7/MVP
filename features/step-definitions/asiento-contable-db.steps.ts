@@ -4,7 +4,7 @@ import { ejecutarQuery } from '../../utils/db';
 import { registrarSiFalla } from '../../utils/softAssert';
 import type { ICustomWorld } from '../../support/world';
 
-const EMPRESA_ID = 10000022;
+import { environment } from '../../config/environment';
 
 Given('comienza a registrar el ID del comprobante emitido', function (this: ICustomWorld) {
   this.comprobanteIdRecorder = new ApiCallRecorder(this.page!, 'ValidarEmisionComprobanteElectronico');
@@ -27,8 +27,8 @@ Then(
     await this.page!.waitForTimeout(2000);
 
     const filas = await ejecutarQuery(
-      'SELECT * FROM [contable].dbo.AsientosContables WHERE ComprobanteID = @comprobanteId AND EmpresaID = @empresaId',
-      { comprobanteId: Number(comprobanteId), empresaId: EMPRESA_ID }
+      'SELECT * FROM dbo.AsientosContables WHERE ComprobanteID = @comprobanteId AND EmpresaID = @empresaId',
+      { comprobanteId: Number(comprobanteId), empresaId: environment.empresaId }
     );
 
     registrarSiFalla(
@@ -63,8 +63,8 @@ Then(
     await this.page!.waitForTimeout(2000);
 
     const filas = await ejecutarQuery(
-      'SELECT * FROM [contable].dbo.AsientosContables WHERE ComprobanteID = @comprobanteId AND EmpresaID = @empresaId',
-      { comprobanteId: Number(comprobanteId), empresaId: EMPRESA_ID }
+      'SELECT * FROM dbo.AsientosContables WHERE ComprobanteID = @comprobanteId AND EmpresaID = @empresaId',
+      { comprobanteId: Number(comprobanteId), empresaId: environment.empresaId }
     );
 
     registrarSiFalla(
@@ -87,8 +87,8 @@ Then(
     await this.page!.waitForTimeout(2000);
 
     const filas = await ejecutarQuery(
-      "SELECT * FROM [contable].dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
-      { patron: `%Recibo ${numero}%`, empresaId: EMPRESA_ID }
+      "SELECT * FROM dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
+      { patron: `%Recibo ${numero}%`, empresaId: environment.empresaId }
     );
 
     registrarSiFalla(this, filas.length > 0, `No se encontró ningún Asiento Contable para el Recibo ${numero}`);
@@ -114,8 +114,8 @@ Then(
     await this.page!.waitForTimeout(2000);
 
     const filas = await ejecutarQuery(
-      "SELECT * FROM [contable].dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
-      { patron: `%Recibo ${numero}%`, empresaId: EMPRESA_ID }
+      "SELECT * FROM dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
+      { patron: `%Recibo ${numero}%`, empresaId: environment.empresaId }
     );
 
     registrarSiFalla(
@@ -138,8 +138,8 @@ Then(
     await this.page!.waitForTimeout(2000);
 
     const filas = await ejecutarQuery(
-      "SELECT * FROM [contable].dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
-      { patron: `%Orden de Pago ${numero}%`, empresaId: EMPRESA_ID }
+      "SELECT * FROM dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
+      { patron: `%Orden de Pago ${numero}%`, empresaId: environment.empresaId }
     );
 
     registrarSiFalla(this, filas.length > 0, `No se encontró ningún Asiento Contable para la Orden de Pago ${numero}`);
@@ -165,8 +165,8 @@ Then(
     await this.page!.waitForTimeout(2000);
 
     const filas = await ejecutarQuery(
-      "SELECT * FROM [contable].dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
-      { patron: `%Orden de Pago ${numero}%`, empresaId: EMPRESA_ID }
+      "SELECT * FROM dbo.AsientosContables WHERE Concepto LIKE @patron AND EmpresaID = @empresaId",
+      { patron: `%Orden de Pago ${numero}%`, empresaId: environment.empresaId }
     );
 
     registrarSiFalla(
